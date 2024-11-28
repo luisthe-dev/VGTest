@@ -17,7 +17,7 @@ class BlogResource extends JsonResource
         return array(
             "id" => $this->id,
             "title" => $this->blog_name,
-            "recent_posts" => PostResource::collection($this->posts()->take(5))
+            "recent_posts" => PostResource::collection($this->posts->take(5))
         );
     }
 }

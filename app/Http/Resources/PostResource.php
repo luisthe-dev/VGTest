@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             "content" => $this->post_content,
             "likes_count" => $this->likes()->count(),
             "comments_count" => $this->comments()->count(),
-            "recent_comments" => CommentResource::collection($this->comments()->take(5))
+            "recent_comments" => CommentResource::collection($this->comments->take(5))
         );
     }
 }
