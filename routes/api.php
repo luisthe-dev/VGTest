@@ -27,7 +27,7 @@ Route::prefix('posts/{post}')->group(function () {
     Route::patch('', [PostController::class, 'updateSinglePost']);
     Route::delete('', [PostController::class, 'deleteSinglePost']);
 
-    Route::prefix('interact')->group(function () {
+    Route::prefix('interact/{user}')->group(function () {
         Route::post('like', [InteractionController::class, 'updateLikeInteraction']);
         Route::post('comment', [InteractionController::class, 'updateCommentInteraction']);
     });
