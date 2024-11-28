@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBlogPost;
+use App\Http\Resources\PostResource;
 use App\Models\Blog;
 use App\Models\Post;
 use App\Traits\Responses;
@@ -13,7 +14,7 @@ class PostController extends Controller
 
     public function getBlogPosts(Blog $blog)
     {
-        return $this->sendSuccess("Blog Posts Fetched Successfully", $blog->posts()->paginate(30));
+        return $this->sendSuccess("Blog Posts Fetched Successfully", PostResource::collection($blog->posts()->paginate(30)));
     }
 
     public function createBlogPost(Blog $blog, CreateBlogPost $request)
@@ -27,12 +28,12 @@ class PostController extends Controller
             "post_content" => $request->content
         ]);
 
-        return $this->sendCreated("Blog Post Created Successfully", $post);
+        return $this->sendCreated("Blog Post Created Successfully", new PostResource($post));
     }
 
     public function getSinglePost(Post $post)
     {
-        return $this->sendSuccess("Post Created Successfully", $post);
+        return $this->sendSuccess("Post Created Successfully", new PostResource($post));
     }
 
     public function updateSinglePost(Post $post, CreateBlogPost $request)
@@ -43,7 +44,7 @@ class PostController extends Controller
             "post_content" => $request->content
         ]);
 
-        return $this->sendSuccess("Post Updated Successfully", $post);
+        return $this->sendSuccess("Post Updated Successfully", new PostResource($post));
     }
 
     public function deleteSinglePost(Post $post)
