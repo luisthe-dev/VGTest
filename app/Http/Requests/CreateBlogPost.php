@@ -11,7 +11,7 @@ class CreateBlogPost extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class CreateBlogPost extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => "required|string",
+            "content" => "required|string",
+            "cover_image" => "sometimes|nullable|image"
         ];
     }
 }
