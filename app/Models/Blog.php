@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
 }
